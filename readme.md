@@ -13,26 +13,26 @@
 	
 # TEST-GNL
 
-__A) Test si le programme fonctionne correctement :
+**A) Test si le programme fonctionne correctement :**
 
 - GCC -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c 	// Compilation avec les flags 
 - ./a.out bible > res         // Permet de mettre la lecture de la bible grace a notre programme dans un fichier
 - diff bible res .           // Permet de verifier les differences entre les deux fichiers (rien ne doit s'afficher)
 - tester avec un buffer_size de 1 et un grand buffer_size (+ de 1000)
 
-__B) Test des adresses :
+**B) Test des adresses :**
 
 - GCC -g3 -fsanitize=address -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c
 - ./a.out bible 	// Le programme doit s'afficher correctement
 
-__C) Test des leaks :
+**C) Test des leaks :**
 
 - GCC -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c
 - valgrind ./a.out bible										
 
-__!! Ne pas compiler avec les flags de -fsanitize et utiliser valgrind apres !!
+**!! Ne pas compiler avec les flags de -fsanitize et utiliser valgrind apres !!**
 
-__RESULTAT :
+**RESULTAT :**
 
 ==40221== LEAK SUMMARY:
 ==40221==    definitely lost: 0 bytes in 0 blocks		// Il doit y avoir 0 pertes
@@ -40,7 +40,7 @@ __RESULTAT :
 ==40221==      possibly lost: 72 bytes in 3 blocks
 ==40221==    still reachable: 200 bytes in 6 blocks
 
-__D) Divers tests
+**D) Divers tests**
 
 - Teste avec un fichier vide 		// Rien ne doit s'afficher 
 - un BUFFER_SIZE <= 0 			// Retourne (null)
@@ -51,17 +51,17 @@ __D) Divers tests
 
 Si le premier test est bon et que vous voulez tester les bonus :
 
-__A) Check qu'il n'y a bien qu'une static
+**A) Check qu'il n'y a bien qu'une static**
 
 - static t_gnl	*list;
 
-__B) Savoir si la gestion du multi-fd est bonne
+**B) Savoir si la gestion du multi-fd est bonne**
 
 - Laisser la deuxieme boucle while (res > 0) en commentaire	// Cette boucle servira pour le test des leaks
 - GCC -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c
 - ./a.out bible test
 
-__RESULAT :
+**RESULAT :**
 
 1:1 In the beginning God created the heaven and the earth.
 Demain, dès l'aube, à l'heure où blanchit la campagne,
@@ -84,13 +84,13 @@ Triste, et le jour pour moi sera comme la nuit.
 from the darkness.
 '\n'
 
-__C) Test des adresses
+**C) Test des adresses**
 
 - Enlever les commentaires de la deuxieme boucle while
 - GCC -g3 -fsanitize=address -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c
 - ./a.out bible test // Le programme doit s'afficher correctement
 
-__D) Test des leaks
+**D) Test des leaks**
 
  Ceci est la partie de test la plus importante, 
  On va tester si notre liste est correcte apres avoir free le maillon de la liste
@@ -101,15 +101,15 @@ __D) Test des leaks
 - GCC -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c
 - valgrind ./a.out bible test	
 
-__!! Ne pas compiler avec les flags de -fsanitize et utiliser valgrind apres !!
+**!! Ne pas compiler avec les flags de -fsanitize et utiliser valgrind apres !!**
 
-__RESULTAT :
-
+**RESULTAT :**
+```
 ==40221== LEAK SUMMARY:
 ==40221==    definitely lost: 0 bytes in 0 blocks 	// Il doit y avoir 0 pertes
 ==40221==    indirectly lost: 0 bytes in 0 blocks	// Ici aussi
 ==40221==    possibly lost: 72 bytes in 3 blocks
-==40221==    still reachable: 200 bytes in 6 blocks
+==40221==    still reachable: 200 bytes in 6 blocks ```
 
 Refaire la meme chose mais en echangeant le fd de la bible et du test :
 
