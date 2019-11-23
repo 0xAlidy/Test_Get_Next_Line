@@ -14,7 +14,7 @@
 #include "get_next_line.h"
 
 /*				TEST-GNL				*/
-/*
+
 int main(int argc, char **argv)
 {  
     int		fd;
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	close(fd);
     return (0);
 }
-*/
+
 /* 				TEST MULTI-FD				*/
 
 int main(int argc, char **argv)
