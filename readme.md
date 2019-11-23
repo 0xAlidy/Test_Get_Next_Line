@@ -12,36 +12,37 @@
 
 A) Test si le programme fonctionne correctement :
 
-- GCC -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c       // Compilation avec les flags 
-- ./a.out bible > res                                  // Permet de mettre la lecture de la bible grace a notre programme dans un fichier
-- diff bible res									  // Permet de verifier les differences entre les deux fichiers (Si le programme est bon rien ne doit s'afficher)
-
+- GCC -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c 	// Compilation avec les flags 
+- ./a.out bible > res         // Permet de mettre la lecture de la bible grace a notre programme dans un fichier
+- diff bible res .           // Permet de verifier les differences entre les deux fichiers (rien ne doit s'afficher)
 - tester avec un buffer_size de 1 et un grand buffer_size (+ de 1000)
 
 B) Test des adresses :
 
 - GCC -g3 -fsanitize=address -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c
-- ./a.out bible 														 // Le programme doit s'afficher correctement
+- ./a.out bible 	// Le programme doit s'afficher correctement
 
 C) Test des leaks :
 
 - GCC -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c
-- valgrind ./a.out bible										// !! Ne pas compiler avec les flags de -fsanitize et utiliser valgrind apres !!
+- valgrind ./a.out bible										
+
+!! Ne pas compiler avec les flags de -fsanitize et utiliser valgrind apres !!
 
 RESULTAT :
 
 ==40221== LEAK SUMMARY:
-==40221==    definitely lost: 0 bytes in 0 blocks				// Il doit y avoir 0 pertes
-==40221==    indirectly lost: 0 bytes in 0 blocks				// Ici aussi
+==40221==    definitely lost: 0 bytes in 0 blocks		// Il doit y avoir 0 pertes
+==40221==    indirectly lost: 0 bytes in 0 blocks		// Ici aussi
 ==40221==      possibly lost: 72 bytes in 3 blocks
 ==40221==    still reachable: 200 bytes in 6 blocks
 
 D) Divers tests
 
-- Teste avec un fichier vide 									// Rien ne doit s'afficher 
-- un BUFFER_SIZE <= 0 											// Retourne (null)
+- Teste avec un fichier vide 		// Rien ne doit s'afficher 
+- un BUFFER_SIZE <= 0 			// Retourne (null)
 - Passer 0 en parametre de la function get_next_line(fd, 0) 	// Test si le pointeur est null => return (null)
-- Passer 0 en parametre de la function get_next_line(0, &line) // Test si le fd est null ou negatif => return (null)
+- Passer 0 en parametre de la function get_next_line(0, &line)  // Test si le fd est null ou negatif => return (null)
 
 # TEST-MULTI-FD
 
@@ -78,29 +79,32 @@ Seul, inconnu, le dos courbé, les mains croisées,
 1:4 And God saw the light, that it was good: and God divided the light
 Triste, et le jour pour moi sera comme la nuit.
 from the darkness.
-																		 // '\n'
+'\n'
 
 C) Test des adresses
 
 - Enlever les commentaires de la deuxieme boucle while
 - GCC -g3 -fsanitize=address -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c
-- ./a.out bible test													 // Le programme doit s'afficher correctement
+- ./a.out bible test // Le programme doit s'afficher correctement
 
 D) Test des leaks
 
-/* 	Ceci est la partie de test la plus importante, 
-	On va tester si notre liste est correcte apres avoir free le maillon de la liste une fois arrive a la fin de la lecture d'un fd
-	La liste doit etre correctement free une fois tous les fd lus 	*/
+ Ceci est la partie de test la plus importante, 
+ On va tester si notre liste est correcte apres avoir free le maillon de la liste
+ une fois arrive a la fin de la lecture d'un fd
+ La liste doit etre correctement free une fois tous les fd lus 	
 
 - Enlever les commentaires de la deuxieme boucle while
 - GCC -Wall -Wextra -Werror -D BUFFER_SIZE=30 *.c
-- valgrind ./a.out bible test					   // !! Ne pas compiler avec les flags de -fsanitize et utiliser valgrind apres !!
+- valgrind ./a.out bible test	
+
+!! Ne pas compiler avec les flags de -fsanitize et utiliser valgrind apres !!
 
 RESULTAT :
 
 ==40221== LEAK SUMMARY:
-==40221==    definitely lost: 0 bytes in 0 blocks				// Il doit y avoir 0 pertes
-==40221==    indirectly lost: 0 bytes in 0 blocks				// Ici aussi
+==40221==    definitely lost: 0 bytes in 0 blocks 	// Il doit y avoir 0 pertes
+==40221==    indirectly lost: 0 bytes in 0 blocks	// Ici aussi
 ==40221==    possibly lost: 72 bytes in 3 blocks
 ==40221==    still reachable: 200 bytes in 6 blocks
 
