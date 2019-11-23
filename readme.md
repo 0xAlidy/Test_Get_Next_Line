@@ -118,7 +118,7 @@ Refaire la meme chose mais en echangeant le fd de la bible et du test :
 - Le resultat doit etre le meme que precedement !
 
 # INFORMATIONS
-
+- Je ne suis pas un expert des leaks et du cassage de code, il peut y avoir des erreurs !
 - Je ne sais pas comment est testé le multi fd par la moulinette.
 - Je pense qu'elle verifie juste s'il marche (Test A et B du multi-fd)
 - Dans le cas où elle ne verifie pas les leaks je vous conseille quand meme de faire mes tests 
