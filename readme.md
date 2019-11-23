@@ -5,7 +5,7 @@
 # INSTALLATION
 
 - Git clone mon dossier
-- Transferer le fichier main.c et la bible (texte de test tres long) dans votre dossier get_next_line
+- Transferez le fichier main.c et la bible (texte de test tres long) dans votre dossier get_next_line
 - N'oubliez pas de mettre en commentaire le main que vous ne voulez pas tester 
 
 # TEST-GNL
