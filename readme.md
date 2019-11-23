@@ -33,13 +33,13 @@
 **!! Ne pas compiler avec les flags de -fsanitize et utiliser valgrind apres !!**
 
 **RESULTAT :**
-
+```
 ==40221== LEAK SUMMARY:
 ==40221==    definitely lost: 0 bytes in 0 blocks		// Il doit y avoir 0 pertes
 ==40221==    indirectly lost: 0 bytes in 0 blocks		// Ici aussi
 ==40221==      possibly lost: 72 bytes in 3 blocks
 ==40221==    still reachable: 200 bytes in 6 blocks
-
+```
 **D) Divers tests**
 
 - Teste avec un fichier vide 		// Rien ne doit s'afficher 
@@ -62,7 +62,7 @@ Si le premier test est bon et que vous voulez tester les bonus :
 - ./a.out bible test
 
 **RESULAT :**
-
+```
 1:1 In the beginning God created the heaven and the earth.
 Demain, dès l'aube, à l'heure où blanchit la campagne,
 
@@ -83,7 +83,7 @@ Seul, inconnu, le dos courbé, les mains croisées,
 Triste, et le jour pour moi sera comme la nuit.
 from the darkness.
 '\n'
-
+```
 **C) Test des adresses**
 
 - Enlever les commentaires de la deuxieme boucle while
@@ -109,8 +109,8 @@ from the darkness.
 ==40221==    definitely lost: 0 bytes in 0 blocks 	// Il doit y avoir 0 pertes
 ==40221==    indirectly lost: 0 bytes in 0 blocks	// Ici aussi
 ==40221==    possibly lost: 72 bytes in 3 blocks
-==40221==    still reachable: 200 bytes in 6 blocks ```
-
+==40221==    still reachable: 200 bytes in 6 blocks 
+```
 Refaire la meme chose mais en echangeant le fd de la bible et du test :
 
 // Il est important d'echanger les deux , c'est pour voir si votre fonction qui free fonctionne correctement
